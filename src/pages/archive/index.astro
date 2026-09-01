@@ -1,9 +1,164 @@
 ---
 import BasicLayout from "@/layouts/BasicLayout.astro"
-import Header from "@/components/header/Header.astro"
+import Search from "@/components/search/Search.astro"
+import Card from "@/components/archive/Card.astro"
+import { getBlogPost } from "@/lib/wagtail.js"
+
+const posts = (await getBlogPost()) ?? []
+const allTags = [...new Set(posts.flatMap((post) => post.tags || []))].slice(0, 10)
+const titleId = "archive-title"
 ---
+<style>
+.archive {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-64) var(--space-64) var(--space-128);
+}
 
-<BasicLayout title="Sobre el blog">
-  <h1>Archive</h1>
+.archive__inner {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  min-width: 0;
+}
+
+.archive__hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  max-width: 48rem;
+  margin: 0 0 var(--space-64);
+}
+
+.archive__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-size-hero);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.archive__lede {
+  margin: 0;
+  max-width: 42rem;
+  font-size: var(--font-size-lede);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-marginalia);
+}
+
+.archive__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--space-32);
+  row-gap: var(--space-64);
+  width: 100%;
+  margin: 0 0 var(--space-96);
+}
+
+.archive__grid:not(:has(article:not([hidden]))) {
+  margin-bottom: var(--space-24);
+}
+
+.archive__none {
+  margin: 0 0 var(--space-64);
+  max-width: 40rem;
+  font-size: var(--font-size-lede);
+  line-height: 1.6;
+  color: var(--color-excerpt);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .archive__hero,
+  .archive__grid :global(.card) {
+    animation: archive-enter 0.7s var(--ease-out) both;
+  }
+
+  .archive__grid :global(.card:nth-child(2)) {
+    animation-delay: 70ms;
+  }
+
+  .archive__grid :global(.card:nth-child(3)) {
+    animation-delay: 140ms;
+  }
+
+  .archive__grid :global(.card:nth-child(n + 4)) {
+    animation-delay: 180ms;
+  }
+}
+
+@keyframes archive-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .archive__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--space-48);
+  }
+
+  .archive__title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+  }
+}
+
+@media (max-width: 800px) {
+  .archive {
+    padding: var(--space-32) var(--space-16) var(--space-64);
+  }
+
+  .archive__hero {
+    margin-bottom: var(--space-32);
+    gap: var(--space-16);
+  }
+
+  .archive__lede {
+    font-size: 1.0625rem;
+  }
+
+  .archive__grid {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-48);
+    margin-bottom: var(--space-64);
+  }
+}
+</style>
+
+<BasicLayout
+  title="Archivo — Tinta Pausa"
+  description="Una colección de textos sobre ficción, música y vida cotidiana. Tómate tu tiempo."
+>
+  <section class="archive" aria-labelledby={titleId}>
+    <div class="archive__inner">
+      <header class="archive__hero">
+        <h1 class="archive__title" id={titleId}>Archivo</h1>
+        <p class="archive__lede">
+          Una colección de textos sobre ficción, música y vida cotidiana. Tómate tu tiempo.
+        </p>
+      </header>
+
+      {posts.length > 0 ? (
+        <Search tags={allTags}>
+          <div class="archive__grid">
+            {posts.map((post, index) => (
+              <Card post={post} eager={index === 0} />
+            ))}
+          </div>
+        </Search>
+      ) : (
+        <p class="archive__none">Aún no hay artículos en el archivo.</p>
+      )}
+    </div>
+  </section>
 </BasicLayout>
-

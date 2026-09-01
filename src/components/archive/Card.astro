@@ -1,0 +1,186 @@
+---
+import { imageUrl } from "@/lib/wagtail.js"
+import { formatShortDate, readingTime } from "@/lib/format.js"
+
+const { post, eager = false } = Astro.props
+
+const title = post.title ?? ""
+const excerpt = post.intro ?? ""
+const tags = post.tags ?? []
+const src = imageUrl(post.image)
+const alt = post.image?.title || post.caption || title
+const datetime = post.date || post.meta?.first_published_at
+const dateLabel = formatShortDate(datetime)
+const timeLabel = readingTime(post.body)
+---
+<style>
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.card[hidden] {
+  display: none;
+}
+
+.card__media {
+  overflow: hidden;
+  width: 100%;
+  height: 272px;
+  margin: 0;
+  background: #e6e2da;
+}
+
+.card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.7s var(--ease-out);
+}
+
+.card:hover .card__media img,
+.card:focus-within .card__media img {
+  transform: scale(1.03);
+}
+
+.card__placeholder {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-border) 35%, #e6e2da) 0%,
+      #e6e2da 100%
+    );
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-16);
+  margin: 0;
+  padding-top: 8px;
+}
+
+.card__tag {
+  font-size: var(--font-size-label);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-marginalia);
+}
+
+.card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-size-h2);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  text-wrap: balance;
+  transition: color var(--duration) var(--ease-out);
+}
+
+.card:hover .card__title,
+.card:focus-within .card__title {
+  color: var(--color-kicker);
+}
+
+.card__excerpt {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  min-height: calc(1.6em * 3);
+  font-size: var(--font-size-excerpt);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-excerpt);
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.card__meta {
+  margin: 0;
+  padding-top: 4px;
+  font-size: var(--font-size-nav);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-marginalia);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover .card__media img,
+  .card:focus-within .card__media img {
+    transform: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .card__media {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .card__title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+}
+</style>
+
+<article class="card">
+  <figure class="card__media">
+    {src ? (
+      <img
+        src={src}
+        alt={alt}
+        width={post.image?.width ?? 800}
+        height={post.image?.height ?? 600}
+        loading={eager ? "eager" : "lazy"}
+        fetchpriority={eager ? "high" : undefined}
+        decoding="async"
+      />
+    ) : (
+      <span class="card__placeholder" aria-hidden="true"></span>
+    )}
+  </figure>
+
+  <div class="card__body">
+    {tags.length > 0 && (
+      <p class="card__tags">
+        {tags.map((tag) => (
+          <span class="card__tag">{tag}</span>
+        ))}
+      </p>
+    )}
+
+    <h2 class="card__title">{title}</h2>
+
+    {excerpt && <p class="card__excerpt">{excerpt}</p>}
+
+    {(dateLabel || timeLabel) && (
+      <p class="card__meta">
+        {dateLabel && datetime && (
+          <time datetime={datetime}>{dateLabel}</time>
+        )}
+        {dateLabel && timeLabel && " — "}
+        {timeLabel}
+      </p>
+    )}
+  </div>
+</article>
