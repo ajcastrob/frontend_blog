@@ -1,0 +1,137 @@
+---
+const username = import.meta.env.PUBLIC_BUTTONDOWN_USERNAME
+---
+<style>
+.newsletter {
+  max-width: 48rem;
+  margin-inline: auto;
+  padding: var(--space-128) var(--space-64);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.newsletter__accent {
+  width: 40px;
+  height: 2px;
+  margin-bottom: var(--space-24);
+  background: var(--color-accent);
+  border: none;
+}
+
+.newsletter__title {
+  margin: 0 0 var(--space-16);
+  font-family: var(--font-display);
+  font-size: var(--font-size-display);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-align: center;
+  letter-spacing: -0.96px;
+}
+
+.newsletter__lead {
+  margin: 0 0 var(--space-32);
+  font-family: var(--font-ui);
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  text-align: center;
+  line-height: 1.625;
+}
+
+.newsletter__form {
+  width: 100%;
+  max-width: 28rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.newsletter__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.newsletter__form label {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-4);
+}
+
+.newsletter__form input[type="text"],
+.newsletter__form input[type="email"] {
+  width: 100%;
+  padding: var(--space-16);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  color: var(--color-text-primary);
+  background: var(--color-surface-muted);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  box-sizing: border-box;
+}
+
+.newsletter__form input:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.newsletter__form button {
+  width: 100%;
+  padding: var(--space-16) var(--space-32);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-white);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.newsletter__form button:hover {
+  background: var(--color-kicker);
+  color: var(--color-surface);
+}
+
+@media (max-width: 800px) {
+  .newsletter {
+    padding: var(--space-64) var(--space-16);
+  }
+
+  .newsletter__title {
+    font-size: 2.5rem;
+  }
+}
+</style>
+
+
+{username && (
+  <section class="newsletter" id="newsletter-section">
+    <hr class="newsletter__accent" aria-hidden="true" />
+    <h2 class="newsletter__title">Newsletter</h2>
+    <p class="newsletter__lead">Déjanos tu nombre y correo y te avisamos de artículos nuevos</p>
+    <form
+      class="newsletter__form"
+      action={`https://buttondown.com/api/emails/embed-subscribe/${username}`}
+      method="post"
+    >
+      <div class="newsletter__field">
+        <label for="bd-name">Nombre</label>
+        <input id="bd-name" type="text" name="metadata__name" required autocomplete="name" />
+      </div>
+      <div class="newsletter__field">
+        <label for="bd-email">Email</label>
+        <input id="bd-email" type="email" name="email" required autocomplete="email" />
+      </div>
+      <input type="hidden" name="embed" value="1" />
+      <button type="submit">Suscribirme</button>
+    </form>
+  </section>
+)}

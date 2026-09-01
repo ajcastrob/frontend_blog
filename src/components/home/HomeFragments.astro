@@ -3,22 +3,22 @@ const titleId = "home-fragments-title"
 
 const fragments = [
   {
-    kind: "Nota",
+    author: "Jorge Luis Borges",
     datetime: "2026-08-20",
-    dateLabel: "20 ago.",
-    title: "Sobre leer despacio",
+    citeLabel: "Un lector",
+    title: "Sobre leer",
     href: "/archive/",
     excerpt:
-      "El ojo no puede atravesar un texto denso sin detenerse; tiene que seguir los contornos del argumento. Leer deprisa puede ser eficiente, pero rara vez deja algo detrás.",
+    "Que otros se jacten de las páginas que han escrito; a mí me enorgullecen las que he leído. No habré sido un filólogo, no habré inquirido las declinaciones, los modos, la laboriosa mutación de la letras...pero a lo largo de mis años he profesado la pasión del lenguaje.",
   },
   {
-    kind: "Fragmento",
+    author: "Marguerite Duras",
     datetime: "2026-08-12",
-    dateLabel: "12 ago.",
-    title: "La textura del papel",
+    citeLabel: "Escribir",
+    title: "Sobre los libros",
     href: "/archive/",
     excerpt:
-      "Pasar una sensación táctil a la pantalla exige algo más que imitar una superficie. También requiere atender a la luz, la sombra y esas pequeñas imperfecciones que recuerdan que alguien hizo la cosa.",
+    "No sé qué es un libro. Nadie lo sabe. Pero cuando hay uno, lo sabemos. Y cuando no hay nada, lo sabemos como sabemos que existimos, no muertos todavía.",
   },
 ]
 ---
@@ -91,7 +91,7 @@ const fragments = [
   top: 48px;
 }
 
-.home-fragment__kind {
+.home-fragment__author {
   margin: 0;
   font-size: var(--font-size-label);
   font-weight: 600;
@@ -216,9 +216,9 @@ const fragments = [
       {fragments.map((fragment) => (
         <article class="home-fragment">
           <div class="home-fragment__meta">
-            <p class="home-fragment__kind">{fragment.kind}</p>
+            <p class="home-fragment__author">{fragment.author}</p>
             <time class="home-fragment__date" datetime={fragment.datetime}>
-              {fragment.dateLabel}
+              {fragment.citeLabel}
             </time>
           </div>
           <h3 class="home-fragment__title">
