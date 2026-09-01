@@ -45,7 +45,7 @@ export const getPagePreview = async (contentType, token) => {
   );
 
   if (!res.ok) {
-    throw new Error(Preview`${res.status}`);
+    throw new Error(`Preview ${res.status}`);
   }
 
   return res.json();
