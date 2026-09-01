@@ -4,7 +4,12 @@
   --color-text-primary: #020302;
   --color-text-secondary: #020302;
   --color-text-tertiary: #5c5c56;
+  --color-text-body: #1c1c17;
+  --color-excerpt: #464741;
+  --color-kicker: #203b4a;
+  --color-marginalia: #655d51;
   --color-border: #c7c7bf;
+  --color-border-soft: color-mix(in srgb, #c7c7bf 30%, transparent);
   --color-surface: #fdf9f1;
   --color-surface-muted: #f7f3eb;
   --color-surface-warm: #f7f3eb;
@@ -16,7 +21,10 @@
   --space-16: 16px;
   --space-24: 24px;
   --space-32: 32px;
+  --space-48: 48px;
   --space-64: 64px;
+  --space-96: 96px;
+  --space-120: 120px;
   --space-128: 128px;
 
   --max-width-frame: 1280px;
@@ -31,10 +39,14 @@
 
   /* type */
   --font-size-display: 48px;
+  --font-size-hero: 64px;
   --font-size-h1: 45px;
   --font-size-h2: 32px;
+  --font-size-lede: 20px;
+  --font-size-excerpt: 17px;
   --font-size-brand: 24px;
   --font-size-nav: 14px;
+  --font-size-label: 12px;
 
   /* motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);

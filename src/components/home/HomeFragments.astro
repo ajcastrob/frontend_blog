@@ -1,0 +1,225 @@
+---
+const titleId = "home-fragments-title"
+
+const fragments = [
+  {
+    kind: "Nota",
+    datetime: "2026-08-20",
+    dateLabel: "20 ago.",
+    title: "Sobre leer despacio",
+    href: "/archive/",
+    excerpt:
+      "El ojo no puede atravesar un texto denso sin detenerse; tiene que seguir los contornos del argumento. Leer deprisa puede ser eficiente, pero rara vez deja algo detrás.",
+  },
+  {
+    kind: "Fragmento",
+    datetime: "2026-08-12",
+    dateLabel: "12 ago.",
+    title: "La textura del papel",
+    href: "/archive/",
+    excerpt:
+      "Pasar una sensación táctil a la pantalla exige algo más que imitar una superficie. También requiere atender a la luz, la sombra y esas pequeñas imperfecciones que recuerdan que alguien hizo la cosa.",
+  },
+]
+---
+<style>
+.home-fragments {
+  width: 100%;
+  max-width: 100%;
+  padding: calc(var(--space-120) - var(--space-64)) var(--space-64) var(--space-96);
+}
+
+.home-fragments__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-32);
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  align-items: start;
+}
+
+.home-fragments__heading {
+  grid-column: 1 / span 2;
+  min-width: 0;
+  margin: 0;
+  padding-top: 17px;
+  border-top: var(--border-width) solid var(--color-border);
+  font-family: var(--font-display);
+  font-size: var(--font-size-h2);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+}
+
+.home-fragments__list {
+  grid-column: 3 / span 7;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+  max-width: 680px;
+  min-width: 0;
+  overflow: visible;
+}
+
+.home-fragment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.home-fragment + .home-fragment {
+  padding-top: 49px;
+  border-top: var(--border-width) solid var(--color-border-soft);
+}
+
+.home-fragment__meta {
+  position: absolute;
+  right: calc(100% + var(--space-32));
+  top: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  width: 96px;
+  text-align: right;
+}
+
+.home-fragment + .home-fragment .home-fragment__meta {
+  top: 48px;
+}
+
+.home-fragment__kind {
+  margin: 0;
+  font-size: var(--font-size-label);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-kicker);
+}
+
+.home-fragment__date {
+  font-size: var(--font-size-nav);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-marginalia);
+}
+
+.home-fragment__title {
+  margin: 0;
+  font-size: var(--font-size-lede);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+.home-fragment__title a {
+  color: inherit;
+  transition: color var(--duration) var(--ease-out);
+}
+
+.home-fragment__title a:hover,
+.home-fragment__title a:focus-visible {
+  color: var(--color-kicker);
+}
+
+.home-fragment__excerpt {
+  margin: 0;
+  max-width: 65ch;
+  font-size: var(--font-size-excerpt);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-excerpt);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-fragments__heading,
+  .home-fragment {
+    animation: home-fragments-enter 0.7s var(--ease-out) both;
+  }
+
+  .home-fragment:nth-child(2) {
+    animation-delay: 80ms;
+  }
+}
+
+@keyframes home-fragments-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .home-fragments__grid {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-24);
+  }
+
+  .home-fragments__heading,
+  .home-fragments__list {
+    grid-column: 1;
+    max-width: none;
+  }
+
+  .home-fragments__heading {
+    width: fit-content;
+    max-width: 100%;
+    font-size: clamp(1.75rem, 5vw, 2rem);
+  }
+
+  .home-fragment + .home-fragment {
+    padding-top: var(--space-32);
+  }
+
+  .home-fragment__meta {
+    position: static;
+    top: auto;
+    right: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-8) var(--space-16);
+    width: auto;
+    text-align: left;
+  }
+}
+
+@media (max-width: 800px) {
+  .home-fragments {
+    padding: var(--space-32) var(--space-16) var(--space-64);
+  }
+}
+</style>
+
+<section class="home-fragments" aria-labelledby={titleId}>
+  <div class="home-fragments__grid">
+    <h2 class="home-fragments__heading" id={titleId}>Fragmentos</h2>
+
+    <div class="home-fragments__list">
+      {fragments.map((fragment) => (
+        <article class="home-fragment">
+          <div class="home-fragment__meta">
+            <p class="home-fragment__kind">{fragment.kind}</p>
+            <time class="home-fragment__date" datetime={fragment.datetime}>
+              {fragment.dateLabel}
+            </time>
+          </div>
+          <h3 class="home-fragment__title">
+            <a href={fragment.href}>{fragment.title}</a>
+          </h3>
+          <p class="home-fragment__excerpt">{fragment.excerpt}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

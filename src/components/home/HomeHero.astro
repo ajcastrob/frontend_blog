@@ -1,0 +1,272 @@
+---
+import { Image } from "astro:assets"
+import libros from "@/assets/home/libros.webp"
+
+const titleId = "home-hero-title"
+---
+<style>
+.home-hero {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-32) var(--space-64) var(--space-64);
+}
+
+.home-hero__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-32);
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  align-items: start;
+}
+
+.home-hero__aside {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding-top: var(--space-8);
+  min-width: 0;
+  align-self: stretch;
+}
+
+.home-hero__kicker {
+  margin: 0;
+  font-size: var(--font-size-label);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-kicker);
+}
+
+.home-hero__note {
+  margin: 0;
+  font-size: var(--font-size-nav);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-marginalia);
+}
+
+.home-hero__rule {
+  flex: 1 1 auto;
+  min-height: 4rem;
+  padding-top: 40px;
+  border-right: var(--border-width) solid var(--color-border);
+}
+
+.home-hero__aside-line {
+  margin: 0;
+  font-size: var(--font-size-nav);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-marginalia);
+}
+
+.home-hero__main {
+  grid-column: 3 / span 7;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  max-width: 680px;
+  min-width: 0;
+}
+
+.home-hero__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-size-hero);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.home-hero__figure {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 370px;
+  margin: 16px 0 0;
+  background: var(--color-surface-muted);
+}
+
+.home-hero__figure :global(img) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.home-hero__desaturate {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  mix-blend-mode: saturation;
+  pointer-events: none;
+}
+
+.home-hero__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.home-hero__copy p {
+  margin: 0;
+  max-width: 65ch;
+  font-size: var(--font-size-lede);
+  font-weight: 400;
+  line-height: 1.625;
+  color: var(--color-text-body);
+}
+
+.home-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 12px 24px;
+  font-size: var(--font-size-label);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: transparent;
+  border: var(--border-width) solid var(--color-accent);
+  border-radius: var(--radius);
+  white-space: nowrap;
+  transition:
+    background-color var(--duration) var(--ease-out),
+    color var(--duration) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.home-hero__cta:hover,
+.home-hero__cta:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-surface);
+}
+
+.home-hero__cta:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero__main {
+    animation: home-hero-enter 0.7s var(--ease-out) both;
+  }
+
+  .home-hero__figure {
+    animation: home-hero-enter 0.9s var(--ease-out) 80ms both;
+  }
+}
+
+@keyframes home-hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .home-hero__desaturate {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .home-hero {
+    padding: var(--space-24) var(--space-16) var(--space-64);
+  }
+
+  .home-hero__grid {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-24);
+  }
+
+  .home-hero__aside,
+  .home-hero__main {
+    grid-column: 1;
+    max-width: none;
+  }
+
+  .home-hero__aside {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-8) var(--space-16);
+    padding-top: 0;
+    padding-bottom: var(--space-16);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .home-hero__rule {
+    flex: 1 1 100%;
+    min-height: 0;
+    padding-top: 0;
+    border-right: 0;
+  }
+
+  .home-hero__title {
+    font-size: clamp(2.25rem, 8vw, 2.75rem);
+  }
+
+  .home-hero__figure {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .home-hero__copy p {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+}
+</style>
+
+<section class="home-hero" aria-labelledby={titleId}>
+  <div class="home-hero__grid">
+    <aside class="home-hero__aside" aria-label="Sobre el archivo">
+      <p class="home-hero__kicker">Escritura / Cultura</p>
+      <p class="home-hero__note">Un archivo personal</p>
+      <div class="home-hero__rule">
+        <p class="home-hero__aside-line">Para leer despacio.</p>
+      </div>
+    </aside>
+
+    <div class="home-hero__main">
+      <h1 class="home-hero__title" id={titleId}>Ficción, música<br />y días comunes</h1>
+
+      <figure class="home-hero__figure">
+        <Image
+          src={libros}
+          alt="Pila de libros en blanco y negro junto a una planta"
+          widths={[480, 680, 960, 1360, 1600]}
+          sizes="(max-width: 800px) calc(100vw - 32px), 680px"
+          format="webp"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <span class="home-hero__desaturate" aria-hidden="true"></span>
+      </figure>
+
+      <div class="home-hero__copy">
+        <p>
+          Un archivo personal de escritura y cultura: textos sobre ficción, canciones, ciudades y esas escenas pequeñas que merecen ser miradas otra vez.
+        </p>
+        <p>Una mirada pausada para lectores que prefieren quedarse un poco más.</p>
+      </div>
+
+      <a class="home-hero__cta" href="/archive/">Explorar el archivo</a>
+    </div>
+  </div>
+</section>

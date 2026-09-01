@@ -20,8 +20,8 @@ export default defineConfig({
       cssVariable: "--font-ui",
       provider: fontProviders.google(),
       weights: [400, 500, 600, 700],
-      styles: ["normal"],
-      fallbacks: ["sans-serif"],
+      styles: ["normal", "italic"],
+      fallbacks: ["serif"],
     },
   ],
 });
