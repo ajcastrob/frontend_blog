@@ -1,0 +1,44 @@
+---
+import BasicLayout from "@/layouts/BasicLayout.astro"
+---
+
+<BasicLayout title="Preview — Tinta Pausa">
+  <article class="article" id="preview">
+    <p id="preview-status">Cargando preview…</p>
+    <h1 id="preview-title"></h1>
+    <p id="preview-intro"></p>
+    <img id="preview-image" alt="" hidden />
+    <div id="preview-body"></div>
+  </article>
+</BasicLayout>
+
+<script>
+  import { getPagePreview, imageUrl } from "@/lib/wagtail.js"
+
+  const params = new URLSearchParams(location.search)
+  const token = params.get("token")
+  const contentType = params.get("content_type")
+  const status = document.querySelector("#preview-status")
+
+  if (!token || !contentType) {
+    status.textContent = "Falta token o content_type"
+  } else {
+    getPagePreview(contentType, token)
+      .then((post) => {
+        status.remove()
+        document.querySelector("#preview-title").textContent = post.title ?? ""
+        document.querySelector("#preview-intro").textContent = post.intro ?? ""
+        const img = document.querySelector("#preview-image")
+        const src = imageUrl(post.image)
+        if (src) {
+          img.src = src
+          img.alt = post.image?.title || post.caption || post.title || ""
+          img.hidden = false
+        }
+        document.querySelector("#preview-body").innerHTML = post.body ?? ""
+      })
+      .catch((err) => {
+        status.textContent = err.message
+      })
+  }
+</script>
