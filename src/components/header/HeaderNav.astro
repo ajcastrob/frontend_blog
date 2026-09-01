@@ -1,0 +1,51 @@
+---
+const { isHome, isArchive, isAbout } = Astro.props
+---
+<style>
+.header__menu {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-24);
+}
+
+.header__link {
+  font-size: var(--font-size-nav);
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  transition: color var(--duration) var(--ease-out);
+}
+
+.header__link:hover,
+.header__link:focus-visible {
+  color: var(--color-accent);
+}
+
+.header__link[aria-current="page"] {
+  font-weight: 500;
+  color: var(--color-accent);
+}
+</style>
+
+<nav class="header__nav" id="site-nav" data-header-nav aria-label="Principal">
+  <ul class="header__menu">
+    <li>
+      <a class="header__link" href="/" aria-current={isHome ? "page" : undefined}>
+        Home 
+      </a>
+    </li>
+    <li>
+      <a class="header__link" href="/archive/" aria-current={isArchive? "page" : undefined}>
+        Archive 
+      </a>
+    </li>
+    <li>
+      <a class="header__link" href="/about/" aria-current={isAbout ? "page" : undefined}>
+        Sobre el blog
+      </a>
+    </li>
+  </ul>
+</nav>

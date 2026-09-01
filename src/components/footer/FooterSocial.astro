@@ -1,0 +1,37 @@
+---
+import Social from "@/components/social/Social.astro"
+---
+<style>
+.footer__nav {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-24);
+}
+
+.footer__link {
+  font-size: var(--font-size-nav);
+  color: var(--color-text-primary);
+  transition: color var(--duration) var(--ease-out);
+}
+
+.footer__link:hover,
+.footer__link:focus-visible {
+  color: var(--color-text-tertiary);
+}
+</style>
+
+<nav aria-label="Pie">
+  <ul class="footer__nav">
+    <li>
+      <Social link="https://github.com/ajcastrob" label="Github" icon="/assets/icons/social.svg#github" />
+    </li>
+    <li>
+      <Social link="https://www.linkedin.com/in/jos%C3%A9-castro-b600791a4/" label="Linkedin" icon="/assets/icons/social.svg#linkedin" />
+    </li>
+    <li>
+      <Social link="https://www.youtube.com/@AshiLabs" label="Youtube" icon="/assets/icons/social.svg#youtube" />
+    </li>
+  </ul>
+</nav>

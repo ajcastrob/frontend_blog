@@ -1,0 +1,212 @@
+---
+import HeaderNav from "@/components/header/HeaderNav.astro"
+import HeaderBrand from "@/components/header/HeaderBrand.astro"
+import HeaderSocial from "@/components/header/HeaderSocial.astro"
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/"
+const isHome = path === "/"
+const isArchive = path === "/archive" || path.startsWith("/archive/")
+const isAbout = path === "/about" || path.startsWith("/about/")
+const linkLogo = "/assets/icons/logo.svg#logo"
+const nameBrand = "Tinta Pausa"
+---
+<style>
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-16) var(--space-64) 0;
+  background: transparent;
+}
+
+.header__shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: var(--max-width-content);
+  min-height: 64px;
+  margin-inline: auto;
+  padding: 0 var(--space-8) 0 var(--space-16);
+  background: var(--color-white);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.header__end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-8);
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.header__toggle {
+  display: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--color-text-primary);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  place-items: center;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.header__toggle:hover,
+.header__toggle:focus-visible {
+  background: var(--color-surface-muted);
+}
+
+.header__toggle-bars,
+.header__toggle-bars::before,
+.header__toggle-bars::after {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 1px;
+}
+
+.header__toggle-bars {
+  position: relative;
+}
+
+.header__toggle-bars::before,
+.header__toggle-bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.header__toggle-bars::before {
+  top: -5px;
+}
+
+.header__toggle-bars::after {
+  top: 5px;
+}
+
+.header__toggle[aria-expanded="true"] .header__toggle-bars {
+  background: transparent;
+}
+
+.header__toggle[aria-expanded="true"] .header__toggle-bars::before {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.header__toggle[aria-expanded="true"] .header__toggle-bars::after {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+@media (max-width: 800px) {
+  .header {
+    padding-inline: var(--space-16);
+  }
+
+  .header__shell {
+    grid-template-columns: 1fr auto;
+  }
+
+  .header[data-nav-open] .header__shell {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+  }
+
+  .header__shell :global(.header__brand) {
+    grid-column: 1;
+    min-width: 0;
+  }
+
+  .header__end {
+    grid-column: 2;
+  }
+
+  .header__toggle {
+    display: grid;
+  }
+
+  .header__shell :global(.header__nav) {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: calc(-1 * var(--border-width));
+    right: calc(-1 * var(--border-width));
+    z-index: 1;
+    padding: var(--space-8) var(--space-8) var(--space-16);
+    background: var(--color-white);
+    border: var(--border-width) solid var(--color-border);
+    border-top: 0;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  }
+
+  .header__shell :global(.header__nav[data-open]) {
+    display: block;
+  }
+
+  .header__shell :global(.header__menu) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-16);
+  }
+}
+</style>
+
+<header class="header" data-header>
+  <div class="header__shell">
+    <HeaderBrand linkLogo={linkLogo} nameBrand={nameBrand} />
+    <HeaderNav isHome={isHome} isArchive={isArchive} isAbout={isAbout} />
+    <div class="header__end">
+      <HeaderSocial />
+      <button
+        class="header__toggle"
+        type="button"
+        data-header-toggle
+        aria-controls="site-nav"
+        aria-expanded="false"
+        aria-label="Abrir menú"
+      >
+        <span class="header__toggle-bars" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector("[data-header]");
+  const toggle = header?.querySelector("[data-header-toggle]");
+  const nav = header?.querySelector("[data-header-nav]");
+
+  if (toggle instanceof HTMLElement && nav instanceof HTMLElement) {
+    const setOpen = (open) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+      nav.toggleAttribute("data-open", open);
+      header?.toggleAttribute("data-nav-open", open);
+    };
+
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setOpen(false));
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setOpen(false);
+    });
+
+    window.matchMedia("(min-width: 801px)").addEventListener("change", (event) => {
+      if (event.matches) setOpen(false);
+    });
+  }
+</script>

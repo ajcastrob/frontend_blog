@@ -1,0 +1,45 @@
+---
+import FooterBrand from "@/components/footer/FooterBrand.astro"
+import FooterSocial from "@/components/footer/FooterSocial.astro"
+
+const year = new Date().getFullYear()
+const name = "Tinta Pausa"
+const linkLogo = "/assets/icons/logo.svg#logo"
+---
+<style>
+.footer {
+  background: var(--color-surface);
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+.footer__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-width-frame);
+  margin-inline: auto;
+  padding: var(--space-32) var(--space-64);
+  gap: var(--space-24);
+}
+
+.footer__copy {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+}
+
+@media (max-width: 800px) {
+  .footer__container {
+    padding-inline: var(--space-16);
+    flex-wrap: wrap;
+  }
+}
+</style>
+
+<footer class="footer">
+  <div class="footer__container">
+    <FooterBrand name={name} linkLogo={linkLogo} />
+    <FooterSocial />
+    <p class="footer__copy">© {year} {name}.</p>
+  </div>
+</footer>
