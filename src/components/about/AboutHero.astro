@@ -1,0 +1,168 @@
+---
+import { Image } from "astro:assets"
+import biblo from "@/assets/about/biblo.webp"
+
+const titleId = "about-hero-title"
+---
+<style>
+.about-hero {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-96) var(--space-64) 0;
+}
+
+.about-hero__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-128);
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  min-width: 0;
+}
+
+.about-hero__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  max-width: 47.5rem;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.about-hero__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-size-hero);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  text-wrap: balance;
+}
+
+.about-hero__lede {
+  margin: 0;
+  max-width: 40rem;
+  font-size: var(--font-size-lede);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-marginalia);
+}
+
+.about-hero__media {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-16);
+  width: 100%;
+  margin: 0;
+}
+
+.about-hero__figure {
+  overflow: hidden;
+  width: 100%;
+  height: 560px;
+  margin: 0;
+  background: #e6e2da;
+}
+
+.about-hero__figure :global(img) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-hero__caption {
+  margin: 0;
+  max-width: 17rem;
+  font-size: var(--font-size-nav);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: right;
+  color: var(--color-marginalia);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .about-hero__header,
+  .about-hero__media {
+    animation: about-enter 0.7s var(--ease-out) both;
+  }
+
+  .about-hero__media {
+    animation-delay: 80ms;
+  }
+}
+
+@keyframes about-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .about-hero__title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+  }
+}
+
+@media (max-width: 800px) {
+  .about-hero {
+    padding: var(--space-32) var(--space-16) 0;
+  }
+
+  .about-hero__inner {
+    gap: var(--space-48);
+  }
+
+  .about-hero__header {
+    gap: var(--space-16);
+  }
+
+  .about-hero__lede {
+    font-size: 1.0625rem;
+  }
+
+  .about-hero__figure {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+</style>
+
+<section class="about-hero" aria-labelledby={titleId}>
+  <div class="about-hero__inner">
+    <header class="about-hero__header">
+      <h1 class="about-hero__title" id={titleId}>Sobre Tinta Pausa</h1>
+      <p class="about-hero__lede">
+        Un espacio dedicado a la contemplación, el diseño y el ritmo de la vida contemporánea.
+      </p>
+    </header>
+
+    <figure class="about-hero__media">
+      <div class="about-hero__figure">
+        <Image
+          src={biblo}
+          alt="Libros vistos desde arriba, abiertos en círculo"
+          widths={[480, 768, 1152, 1600, 2400]}
+          sizes="(max-width: 800px) calc(100vw - 32px), min(1152px, calc(100vw - 128px))"
+          format="webp"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+      <figcaption class="about-hero__caption">
+        El espacio donde las ideas toman forma.
+      </figcaption>
+    </figure>
+  </div>
+</section>

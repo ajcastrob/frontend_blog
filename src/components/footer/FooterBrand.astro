@@ -7,6 +7,13 @@ const { name, linkLogo } = Astro.props
   align-items: center;
   min-width: 0;
   color: var(--color-text-primary);
+  opacity: 0.72;
+  transition: opacity var(--duration) var(--ease-out);
+}
+
+.footer__brand:hover,
+.footer__brand:focus-visible {
+  opacity: 1;
 }
 
 .footer__logo {

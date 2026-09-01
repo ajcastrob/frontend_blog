@@ -1,0 +1,146 @@
+---
+const titleId = "about-manifesto-title"
+
+const aims = [
+  "Fomentar la concentración prolongada.",
+  "Explorar la intersección entre tecnología, literatura y diseño.",
+  "Cuestionar la velocidad como única métrica de éxito.",
+]
+---
+<style>
+.about-manifesto {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-128) var(--space-64);
+}
+
+.about-manifesto__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-32);
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  align-items: start;
+}
+
+.about-manifesto__label {
+  grid-column: 1 / span 2;
+  margin: 0;
+  padding-top: 4px;
+  font-size: var(--font-size-label);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-marginalia);
+}
+
+.about-manifesto__copy {
+  grid-column: 3 / span 7;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  max-width: 680px;
+  min-width: 0;
+}
+
+.about-manifesto__copy p {
+  margin: 0;
+  max-width: 65ch;
+  font-size: var(--font-size-excerpt);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-body);
+}
+
+.about-manifesto__copy em {
+  font-style: italic;
+}
+
+.about-manifesto__aims {
+  margin: 0;
+  padding: 0 0 0 var(--space-16);
+  border-left: var(--border-width) solid var(--color-border);
+}
+
+.about-manifesto__aims li {
+  position: relative;
+  margin: 0;
+  padding-left: 1.35em;
+  font-size: var(--font-size-excerpt);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-body);
+}
+
+.about-manifesto__aims li + li {
+  margin-top: var(--space-16);
+}
+
+.about-manifesto__aims li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-text-tertiary);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .about-manifesto__grid {
+    animation: about-manifesto-enter 0.7s var(--ease-out) 120ms both;
+  }
+}
+
+@keyframes about-manifesto-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .about-manifesto__grid {
+    grid-template-columns: 1fr;
+    row-gap: var(--space-16);
+  }
+
+  .about-manifesto__label,
+  .about-manifesto__copy {
+    grid-column: 1;
+    max-width: 40rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .about-manifesto {
+    padding: var(--space-64) var(--space-16);
+  }
+}
+</style>
+
+<section class="about-manifesto" aria-labelledby={titleId}>
+  <div class="about-manifesto__grid">
+    <h2 class="about-manifesto__label" id={titleId}>Manifiesto</h2>
+
+    <div class="about-manifesto__copy">
+      <p>
+        En un ecosistema digital definido por la urgencia, la interrupción constante y la sobrecarga sensorial, <em>Tinta Pausa</em> nace como un refugio. Creemos en el valor incalculable de la lectura lenta, en la arquitectura invisible del buen diseño y en el silencio que permite que las ideas resuenen.
+      </p>
+      <p>
+        Nuestra filosofía de diseño se inspira en la tradición editorial clásica: márgenes generosos que invitan al pensamiento periférico, tipografías cuidadosamente seleccionadas que honran la vista del lector, y una ausencia deliberada de adornos superfluos. Consideramos que la forma no solo debe seguir a la función, sino que debe elevar la experiencia de la comprensión profunda.
+      </p>
+      <ul class="about-manifesto__aims">
+        {aims.map((aim) => (
+          <li>{aim}</li>
+        ))}
+      </ul>
+      <p>
+        Invitamos a nuestros lectores a detenerse. A tomarse el tiempo necesario para digerir un párrafo, a apreciar el peso visual de una imagen, y a encontrar belleza en la quietud de una página bien compuesta.
+      </p>
+    </div>
+  </div>
+</section>

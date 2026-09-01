@@ -14,19 +14,26 @@ const { isHome, isArchive, isAbout } = Astro.props
   font-size: var(--font-size-nav);
   font-weight: 400;
   line-height: 18px;
-  color: var(--color-text-secondary);
+  color: var(--color-marginalia);
   white-space: nowrap;
-  transition: color var(--duration) var(--ease-out);
+  text-underline-offset: 0.38em;
+  text-decoration-thickness: 1px;
+  transition:
+    color var(--duration) var(--ease-out),
+    text-decoration-color var(--duration) var(--ease-out);
 }
 
 .header__link:hover,
 .header__link:focus-visible {
-  color: var(--color-accent);
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
 }
 
 .header__link[aria-current="page"] {
-  font-weight: 500;
-  color: var(--color-accent);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-decoration: none;
 }
 </style>
 
@@ -34,12 +41,12 @@ const { isHome, isArchive, isAbout } = Astro.props
   <ul class="header__menu">
     <li>
       <a class="header__link" href="/" aria-current={isHome ? "page" : undefined}>
-        Home 
+        Home
       </a>
     </li>
     <li>
-      <a class="header__link" href="/archive/" aria-current={isArchive? "page" : undefined}>
-        Archive 
+      <a class="header__link" href="/archive/" aria-current={isArchive ? "page" : undefined}>
+       Archivo 
       </a>
     </li>
     <li>

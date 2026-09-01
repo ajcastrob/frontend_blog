@@ -4,12 +4,22 @@ const { link, label, icon } = Astro.props
 <style>
 a {
   display: flex;
+  color: var(--color-marginalia);
+  border-radius: 2px;
+  transition:
+    color var(--duration) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+a:hover,
+a:focus-visible {
   color: var(--color-text-primary);
-  transition: color var(--duration) var(--ease-out), fill var(--duration) var(--ease-out);
 }
-a:hover {
-  color: var(--color-accent);
+
+a:active {
+  transform: scale(0.96);
 }
+
 svg {
   width: 28px;
   height: 28px;

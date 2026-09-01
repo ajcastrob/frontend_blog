@@ -1,3 +1,19 @@
 ---
+import BasicLayout from "@/layouts/BasicLayout.astro"
+import ArticleBody from "@/components/archive/ArticleBody.astro"
+import { getBlogPost } from "@/lib/wagtail.js"
 
+export async function getStaticPaths() {
+  const posts = (await getBlogPost()) ?? []
+  return posts.map((post) => ({
+    params: { slug: post.meta.slug },
+    props: { post },
+  }))
+}
+
+const { post } = Astro.props
 ---
+
+<BasicLayout title={`${post.title} — Tinta Pausa`} description={post.intro || undefined}>
+  <ArticleBody post={post} />
+</BasicLayout>

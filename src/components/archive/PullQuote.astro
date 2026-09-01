@@ -1,0 +1,48 @@
+---
+const { quote = "" } = Astro.props
+const text = String(quote)
+  .replace(/^[«“"‘']+|[»”"’']+$/g, "")
+  .trim()
+---
+{text && (
+  <figure class="pull-quote">
+    <blockquote>
+      <p>“{text}”</p>
+    </blockquote>
+  </figure>
+)}
+
+<style>
+.pull-quote {
+  width: 100%;
+  margin: 0;
+  padding: var(--space-96) var(--space-64);
+  background: var(--color-surface-muted);
+}
+
+.pull-quote blockquote {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.pull-quote p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-size-h2);
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 800px) {
+  .pull-quote {
+    padding: var(--space-48) var(--space-16);
+  }
+
+  .pull-quote p {
+    font-size: clamp(1.35rem, 5vw, 2rem);
+  }
+}
+</style>
