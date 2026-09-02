@@ -1,5 +1,5 @@
 ---
-import { fragments } from "@/lib/getQuotes.js"
+import HomeFragmentsList from "@/components/home/HomeFragmentsList.jsx"
 const titleId = "home-fragments-title"
 ---
 <style>
@@ -32,7 +32,7 @@ const titleId = "home-fragments-title"
   color: var(--color-marginalia);
 }
 
-.home-fragments__list {
+.home-fragments :global(.home-fragments__list) {
   grid-column: 3 / span 7;
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@ const titleId = "home-fragments-title"
   overflow: visible;
 }
 
-.home-fragment {
+.home-fragments :global(.home-fragment) {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -50,12 +50,12 @@ const titleId = "home-fragments-title"
   min-width: 0;
 }
 
-.home-fragment + .home-fragment {
+.home-fragments :global(.home-fragment + .home-fragment) {
   padding-top: 49px;
   border-top: var(--border-width) solid var(--color-border-soft);
 }
 
-.home-fragment__meta {
+.home-fragments :global(.home-fragment__meta) {
   position: absolute;
   right: calc(100% + var(--space-32));
   top: 72px;
@@ -67,11 +67,11 @@ const titleId = "home-fragments-title"
   text-align: right;
 }
 
-.home-fragment + .home-fragment .home-fragment__meta {
+.home-fragments :global(.home-fragment + .home-fragment .home-fragment__meta) {
   top: 48px;
 }
 
-.home-fragment__author {
+.home-fragments :global(.home-fragment__author) {
   margin: 0;
   font-size: var(--font-size-label);
   font-weight: 600;
@@ -81,7 +81,7 @@ const titleId = "home-fragments-title"
   color: var(--color-kicker);
 }
 
-.home-fragment__date {
+.home-fragments :global(.home-fragment__date) {
   font-size: var(--font-size-nav);
   font-style: italic;
   font-weight: 400;
@@ -89,7 +89,7 @@ const titleId = "home-fragments-title"
   color: color-mix(in srgb, var(--color-marginalia) 78%, var(--color-surface));
 }
 
-.home-fragment__title {
+.home-fragments :global(.home-fragment__title) {
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--font-size-lede);
@@ -98,7 +98,7 @@ const titleId = "home-fragments-title"
   color: var(--color-text-primary);
 }
 
-.home-fragment__title a {
+.home-fragments :global(.home-fragment__title a) {
   color: inherit;
   text-underline-offset: 0.18em;
   text-decoration-thickness: 1px;
@@ -107,14 +107,14 @@ const titleId = "home-fragments-title"
     text-decoration-color var(--duration) var(--ease-out);
 }
 
-.home-fragment__title a:hover,
-.home-fragment__title a:focus-visible {
+.home-fragments :global(.home-fragment__title a:hover),
+.home-fragments :global(.home-fragment__title a:focus-visible) {
   color: var(--color-kicker);
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, var(--color-kicker) 40%, transparent);
 }
 
-.home-fragment__excerpt {
+.home-fragments :global(.home-fragment__excerpt) {
   margin: 0;
   max-width: 65ch;
   font-size: var(--font-size-excerpt);
@@ -125,11 +125,11 @@ const titleId = "home-fragments-title"
 
 @media (prefers-reduced-motion: no-preference) {
   .home-fragments__heading,
-  .home-fragment {
+  .home-fragments :global(.home-fragment) {
     animation: home-fragments-enter 0.7s var(--ease-out) both;
   }
 
-  .home-fragment:nth-child(2) {
+  .home-fragments :global(.home-fragment:nth-child(2)) {
     animation-delay: 80ms;
   }
 }
@@ -153,7 +153,7 @@ const titleId = "home-fragments-title"
   }
 
   .home-fragments__heading,
-  .home-fragments__list {
+  .home-fragments :global(.home-fragments__list) {
     grid-column: 1;
     max-width: none;
   }
@@ -164,11 +164,11 @@ const titleId = "home-fragments-title"
     font-size: clamp(1.75rem, 5vw, 2rem);
   }
 
-  .home-fragment + .home-fragment {
+  .home-fragments :global(.home-fragment + .home-fragment) {
     padding-top: var(--space-32);
   }
 
-  .home-fragment__meta {
+  .home-fragments :global(.home-fragment__meta) {
     position: static;
     top: auto;
     right: auto;
@@ -191,22 +191,6 @@ const titleId = "home-fragments-title"
 <section class="home-fragments" aria-labelledby={titleId}>
   <div class="home-fragments__grid">
     <h2 class="home-fragments__heading" id={titleId}>Fragmentos</h2>
-
-    <div class="home-fragments__list">
-      {fragments.map((fragment) => (
-        <article class="home-fragment">
-          <div class="home-fragment__meta">
-            <p class="home-fragment__author">{fragment.author}</p>
-            <time class="home-fragment__date" datetime={fragment.datetime}>
-              {fragment.citeLabel}
-            </time>
-          </div>
-          <h3 class="home-fragment__title">
-            <a href={fragment.href}>{fragment.title}</a>
-          </h3>
-          <p class="home-fragment__excerpt">{fragment.excerpt}</p>
-        </article>
-      ))}
-    </div>
+    <HomeFragmentsList client:only="react" />
   </div>
 </section>

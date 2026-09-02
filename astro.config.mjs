@@ -1,11 +1,14 @@
 import { defineConfig, fontProviders } from "astro/config";
 import supersvgPlugin from "vite-plugin-supersvg";
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [supersvgPlugin()],
   },
+
   fonts: [
     {
       name: "Playfair Display",
@@ -24,4 +27,6 @@ export default defineConfig({
       fallbacks: ["serif"],
     },
   ],
+
+  integrations: [react()],
 });

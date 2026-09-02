@@ -1,6 +1,6 @@
 import quotes from "./quotes.json" with { type: "json" };
 
-function getQuotes(arr) {
+export function getQuotes(arr = quotes) {
   const copy = [...arr];
 
   for (let i = copy.length - 1; i > 0; i--) {
@@ -10,5 +10,3 @@ function getQuotes(arr) {
 
   return copy.slice(0, 2);
 }
-
-export const fragments = getQuotes(quotes);
