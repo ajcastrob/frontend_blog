@@ -41,56 +41,7 @@ import "@/styles/article.css"
 </BasicLayout>
 
 <script>
-  import { getPagePreview, imageUrl } from "@/lib/wagtail.js"
-  import { splitArticleHtml } from "@/lib/format.js"
+  import { renderPreview } from "@/lib/preview.js"
 
-  const params = new URLSearchParams(location.search)
-  const token = params.get("token")
-  const contentType = params.get("content_type")
-  const status = document.querySelector("#preview-status")
-
-  const unwrap = (value) =>
-    String(value || "")
-      .replace(/^[«“"‘']+|[»”"’']+$/g, "")
-      .trim()
-
-  if (!token || !contentType) {
-    status.textContent = "Falta token o content_type"
-  } else {
-    getPagePreview(contentType, token)
-      .then((post) => {
-        status.remove()
-        document.querySelector("#preview-title").textContent = post.title ?? ""
-        document.querySelector("#preview-intro").textContent = post.intro ?? ""
-        const img = document.querySelector("#preview-image")
-        const media = document.querySelector("#preview-media")
-        const src = imageUrl(post.image)
-        if (src) {
-          img.src = src
-          img.alt = post.image?.title || post.caption || post.title || ""
-          media.hidden = false
-        }
-
-        const quote = unwrap(post.quote)
-        const { before, after } = quote
-          ? splitArticleHtml(post.body ?? "")
-          : { before: post.body ?? "", after: "" }
-
-        document.querySelector("#preview-before").innerHTML = before
-        document.querySelector("#preview-after").innerHTML = after
-
-        if (quote && after) {
-          const mid = document.querySelector("#preview-quote-mid")
-          document.querySelector("#preview-quote-mid-text").textContent = `“${quote}”`
-          mid.hidden = false
-        } else if (quote) {
-          const early = document.querySelector("#preview-quote-early")
-          document.querySelector("#preview-quote-early-text").textContent = `“${quote}”`
-          early.hidden = false
-        }
-      })
-      .catch((err) => {
-        status.textContent = err.message
-      })
-  }
+  renderPreview()
 </script>
