@@ -1,14 +1,27 @@
 ---
 import BasicLayout from "@/layouts/BasicLayout.astro"
+import "@/styles/article.css"
 ---
 
 <BasicLayout title="Preview — Tinta Pausa">
   <article class="article" id="preview">
-    <p id="preview-status">Cargando preview…</p>
-    <h1 id="preview-title"></h1>
-    <p id="preview-intro"></p>
-    <img id="preview-image" alt="" hidden />
-    <div id="preview-body"></div>
+    <div class="article__inner">
+      <p id="preview-status">Cargando preview…</p>
+      <header class="article__header">
+        <h1 class="article__title" id="preview-title"></h1>
+        <p class="article__lede" id="preview-intro"></p>
+      </header>
+      <figure class="article__media" id="preview-media" hidden>
+        <div class="article__cover">
+          <img id="preview-image" alt="" />
+        </div>
+      </figure>
+      <div class="article__layout">
+        <div class="article__main">
+          <div class="article-body" id="preview-body"></div>
+        </div>
+      </div>
+    </div>
   </article>
 </BasicLayout>
 
@@ -29,11 +42,12 @@ import BasicLayout from "@/layouts/BasicLayout.astro"
         document.querySelector("#preview-title").textContent = post.title ?? ""
         document.querySelector("#preview-intro").textContent = post.intro ?? ""
         const img = document.querySelector("#preview-image")
+        const media = document.querySelector("#preview-media")
         const src = imageUrl(post.image)
         if (src) {
           img.src = src
           img.alt = post.image?.title || post.caption || post.title || ""
-          img.hidden = false
+          media.hidden = false
         }
         document.querySelector("#preview-body").innerHTML = post.body ?? ""
       })
