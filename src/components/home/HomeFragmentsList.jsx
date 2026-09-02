@@ -11,7 +11,7 @@ export default function HomeFragmentsList() {
   return (
     <div className="home-fragments__list">
       {fragments.map((fragment) => (
-        <article className="home-fragment" key={fragment.title}>
+        <article className="home-fragment" key={fragment.id}>
           <div className="home-fragment__meta">
             <p className="home-fragment__author">{fragment.author}</p>
             <time className="home-fragment__date" dateTime={fragment.datetime}>

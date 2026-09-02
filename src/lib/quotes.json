@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "author": "Jorge Luis Borges",
     "datetime": "2026-08-20",
     "citeLabel": "Un lector",
@@ -8,6 +9,7 @@
     "excerpt": "Que otros se jacten de las páginas que han escrito; a mí me enorgullecen las que he leído. No habré sido un filólogo, no habré inquirido las declinaciones, los modos, la laboriosa mutación de la letras...pero a lo largo de mis años he profesado la pasión del lenguaje."
   },
   {
+    "id": 2,
     "author": "Marguerite Duras",
     "datetime": "2026-08-12",
     "citeLabel": "Escribir",
@@ -16,6 +18,7 @@
     "excerpt": "No sé qué es un libro. Nadie lo sabe. Pero cuando hay uno, lo sabemos. Y cuando no hay nada, lo sabemos como sabemos que existimos, no muertos todavía."
   },
   {
+    "id": 3,
     "author": "Franz Kafka",
     "datetime": "2026-07-15",
     "citeLabel": "Cartas a Milena",
@@ -24,6 +27,7 @@
     "excerpt": "Creo que deberíamos leer tan solo libros que nos muerdan y nos pinchen. Si el libro que leemos no nos despierta de un puñetazo en el cráneo, ¿para qué lo leemos?"
   },
   {
+    "id": 4,
     "author": "Virginia Woolf",
     "datetime": "2026-09-03",
     "citeLabel": "Una habitación propia",
@@ -32,6 +36,7 @@
     "excerpt": "Una mujer debe tener dinero y una habitación propia si va a escribir ficción. Y eso deja sin resolver el gran problema de la verdadera naturaleza de la mujer y la verdadera naturaleza de la ficción."
   },
   {
+    "id": 5,
     "author": "Gabriel García Márquez",
     "datetime": "2026-06-22",
     "citeLabel": "Vivir para contarla",
@@ -40,6 +45,7 @@
     "excerpt": "La vida no es la que uno vivió, sino la que uno recuerda y cómo la recuerda para contarla. Los recuerdos son de quien los cuenta, no de quien los vivió."
   },
   {
+    "id": 6,
     "author": "Clarice Lispector",
     "datetime": "2026-10-11",
     "citeLabel": "Agua viva",
@@ -48,6 +54,7 @@
     "excerpt": "Quiero capturar el 'es' de la cosa. Quiero poseer los átomos del tiempo. Y quiero agarrar el presente que por su naturaleza me está prohibido: el presente se me escapa, huye, soy incapaz de retenerlo."
   },
   {
+    "id": 7,
     "author": "Julio Cortázar",
     "datetime": "2026-05-14",
     "citeLabel": "Rayuela",
@@ -56,6 +63,7 @@
     "excerpt": "Andábamos sin buscarnos pero sabiendo que andábamos para encontrarnos. Oh Maga, en cada mujer parecida a vos se agolpaba como un silencio ensordecedor."
   },
   {
+    "id": 8,
     "author": "Alejandra Pizarnik",
     "datetime": "2026-11-02",
     "citeLabel": "Diarios",
@@ -64,6 +72,7 @@
     "excerpt": "En esta noche, en este corazón, la palabra es todo. La palabra es mi única arma. El silencio es mi único refugio. Escribir es buscar en el tumulto de los quemados el hueso pequeño y pálido correspondiente al corazón."
   },
   {
+    "id": 9,
     "author": "Fernando Pessoa",
     "datetime": "2026-04-18",
     "citeLabel": "El libro del desasosiego",
@@ -72,6 +81,7 @@
     "excerpt": "No tengo ambiciones ni deseos. Ser poeta no es una ambición mía. Es mi manera de estar solo. Y si sueño, es porque hasta soñar me parece un esfuerzo demasiado grande para alguien que ya vive tanto."
   },
   {
+    "id": 10,
     "author": "Octavio Paz",
     "datetime": "2026-03-31",
     "citeLabel": "El laberinto de la soledad",
@@ -80,6 +90,7 @@
     "excerpt": "Todos los pueblos, en algún momento, se han preguntado —y se preguntan— quiénes son y de dónde vienen. Pero pocas veces esa interrogación ha revestido el carácter apasionado, desesperado y casi trágico que tiene entre nosotros."
   },
   {
+    "id": 11,
     "author": "Silvina Ocampo",
     "datetime": "2026-07-28",
     "citeLabel": "La furia",
@@ -88,6 +99,7 @@
     "excerpt": "Los niños no son buenos ni malos. Son precisos. Tienen una exactitud que los adultos hemos olvidado y que llamamos crueldad simplemente porque ya no somos capaces de mirarla de frente."
   },
   {
+    "id": 12,
     "author": "Roberto Bolaño",
     "datetime": "2026-09-19",
     "citeLabel": "Los detectives salvajes",
@@ -96,6 +108,7 @@
     "excerpt": "Todo, en esta vida, se puede perdonar, menos la cobardía. La literatura es un oficio peligroso, un salto al vacío que no admite paracaídas. Los poetas verdaderos siempre están al borde del abismo."
   },
   {
+    "id": 13,
     "author": "Alfonsina Storni",
     "datetime": "2026-02-14",
     "citeLabel": "Ocre",
@@ -104,6 +117,7 @@
     "excerpt": "Me voy a dormir, no te preocupes más. Dejo cartas escritas y el balcón abierto. Me seduce el mar, ese gran vientre azul donde todas las penas se disuelven en sal y espuma."
   },
   {
+    "id": 14,
     "author": "Adolfo Bioy Casares",
     "datetime": "2026-08-05",
     "citeLabel": "La invención de Morel",
@@ -112,6 +126,7 @@
     "excerpt": "Estar con ella, mirar a Faustine, me parecía un acto de fe, una religión que yo mismo había inventado. Prefería la muerte antes que perder la imagen de sus manos moviéndose en la luz."
   },
   {
+    "id": 15,
     "author": "Rosario Castellanos",
     "datetime": "2026-01-27",
     "citeLabel": "Mujer que sabe latín...",
@@ -120,6 +135,7 @@
     "excerpt": "Porque tuvimos una infancia larga como la de los árboles, crecimos hacia adentro. Nos enseñaron a hablar bajito, a ocupar poco espacio, a pedir perdón por existir. Pero aquí estamos, escribiendo con tinta que quema."
   },
   {
+    "id": 16,
     "author": "Juan Rulfo",
     "datetime": "2026-12-09",
     "citeLabel": "Pedro Páramo",
@@ -128,6 +144,7 @@
     "excerpt": "Vine a Comala porque me dijeron que acá vivía mi padre, un tal Pedro Páramo. Mi madre me lo dijo. Y yo le prometí que vendría a verlo en cuanto ella muriera. Le apreté las manos en señal de que lo haría; pues ella estaba por morirse."
   },
   {
+    "id": 17,
     "author": "Idea Vilariño",
     "datetime": "2026-06-11",
     "citeLabel": "No",
@@ -136,6 +153,7 @@
     "excerpt": "Si muriera esta noche, si pudiera morir, si fuera hermoso morir, morir ahora. No por ti, no por nadie. Por el cansancio de amar lo que no vuelve, de llamar a una puerta que hace siglos fue tapiada."
   },
   {
+    "id": 18,
     "author": "Mario Benedetti",
     "datetime": "2026-10-25",
     "citeLabel": "Gracias por el fuego",
@@ -144,6 +162,7 @@
     "excerpt": "Cinco minutos bastan para soñar toda una vida, así de relativo es el tiempo. Y sin embargo, pasamos años enteros esperando que esos cinco minutos lleguen, sentados en oficinas grises, fingiendo que respiramos."
   },
   {
+    "id": 19,
     "author": "Samanta Schweblin",
     "datetime": "2026-04-02",
     "citeLabel": "Distancia de rescate",
@@ -152,6 +171,7 @@
     "excerpt": "Hay que ser paciente y esperar, dejar que los acontecimientos encuentren su propio cauce. Pero el miedo no espera. El miedo es un animal que respira en la nuca mientras intentas explicarle a tu hija por qué no debe tocar la hierba."
   },
   {
+    "id": 20,
     "author": "Nicanor Parra",
     "datetime": "2026-05-30",
     "citeLabel": "Poemas y antipoemas",
@@ -160,6 +180,7 @@
     "excerpt": "La poesía terminó conmigo. Yo no la maté, se murió sola de aburrimiento, de tanta rima perfecta y tanto cisne de cartón. Lo que queda es hablar como habla la gente en la calle, con errores y todo."
   },
   {
+    "id": 21,
     "author": "Sara Gallardo",
     "datetime": "2026-07-07",
     "citeLabel": "Enero",
@@ -168,6 +189,7 @@
     "excerpt": "El campo no es un paisaje, es una sentencia. Quien nace entre surcos aprende pronto que el horizonte no es una promesa, sino una pared transparente contra la que uno camina toda la vida sin llegar nunca."
   },
   {
+    "id": 22,
     "author": "Felisberto Hernández",
     "datetime": "2026-09-28",
     "citeLabel": "Las hortensias",
