@@ -1,6 +1,6 @@
 ---
 import { imageUrl } from "@/lib/wagtail.js"
-import { formatDate } from "@/lib/format.js"
+import { formatDate, splitArticleHtml } from "@/lib/format.js"
 import PullQuote from "@/components/archive/PullQuote.astro"
 import "@/styles/article.css"
 
@@ -11,6 +11,9 @@ const title = post.title ?? ""
 const lede = post.intro ?? ""
 const body = post.body ?? ""
 const pullQuote = (post.quote ?? "").trim()
+const { before, after } = pullQuote
+  ? splitArticleHtml(body)
+  : { before: body, after: "" }
 const cover = imageUrl(post.image)
 const alt = post.image?.title || post.caption || title
 const caption = post.caption ?? ""
@@ -73,12 +76,22 @@ const initial = authorName.trim().charAt(0).toUpperCase()
       </figure>
     )}
 
-    {pullQuote && <PullQuote quote={pullQuote} />}
+    {pullQuote && !after && <PullQuote quote={pullQuote} />}
 
-    {(body || authorName) && (
+    {before && (
       <div class="article__layout">
         <div class="article__main">
-          {body && <div class="article-body article-body--lead" set:html={body} />}
+          <div class="article-body article-body--lead" set:html={before} />
+        </div>
+      </div>
+    )}
+
+    {pullQuote && after && <PullQuote quote={pullQuote} />}
+
+    {(after || authorName) && (
+      <div class="article__layout">
+        <div class="article__main">
+          {after && <div class="article-body" set:html={after} />}
 
           {authorName && (
             <footer class="article__footer">

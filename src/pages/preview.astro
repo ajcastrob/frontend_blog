@@ -16,9 +16,24 @@ import "@/styles/article.css"
           <img id="preview-image" alt="" />
         </div>
       </figure>
+      <figure class="pull-quote" id="preview-quote-early" hidden>
+        <blockquote>
+          <p id="preview-quote-early-text"></p>
+        </blockquote>
+      </figure>
       <div class="article__layout">
         <div class="article__main">
-          <div class="article-body" id="preview-body"></div>
+          <div class="article-body article-body--lead" id="preview-before"></div>
+        </div>
+      </div>
+      <figure class="pull-quote" id="preview-quote-mid" hidden>
+        <blockquote>
+          <p id="preview-quote-mid-text"></p>
+        </blockquote>
+      </figure>
+      <div class="article__layout">
+        <div class="article__main">
+          <div class="article-body" id="preview-after"></div>
         </div>
       </div>
     </div>
@@ -27,11 +42,17 @@ import "@/styles/article.css"
 
 <script>
   import { getPagePreview, imageUrl } from "@/lib/wagtail.js"
+  import { splitArticleHtml } from "@/lib/format.js"
 
   const params = new URLSearchParams(location.search)
   const token = params.get("token")
   const contentType = params.get("content_type")
   const status = document.querySelector("#preview-status")
+
+  const unwrap = (value) =>
+    String(value || "")
+      .replace(/^[«“"‘']+|[»”"’']+$/g, "")
+      .trim()
 
   if (!token || !contentType) {
     status.textContent = "Falta token o content_type"
@@ -49,7 +70,24 @@ import "@/styles/article.css"
           img.alt = post.image?.title || post.caption || post.title || ""
           media.hidden = false
         }
-        document.querySelector("#preview-body").innerHTML = post.body ?? ""
+
+        const quote = unwrap(post.quote)
+        const { before, after } = quote
+          ? splitArticleHtml(post.body ?? "")
+          : { before: post.body ?? "", after: "" }
+
+        document.querySelector("#preview-before").innerHTML = before
+        document.querySelector("#preview-after").innerHTML = after
+
+        if (quote && after) {
+          const mid = document.querySelector("#preview-quote-mid")
+          document.querySelector("#preview-quote-mid-text").textContent = `“${quote}”`
+          mid.hidden = false
+        } else if (quote) {
+          const early = document.querySelector("#preview-quote-early")
+          document.querySelector("#preview-quote-early-text").textContent = `“${quote}”`
+          early.hidden = false
+        }
       })
       .catch((err) => {
         status.textContent = err.message
